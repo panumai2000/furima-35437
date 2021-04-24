@@ -1,24 +1,62 @@
-# README
+## Users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column         | Type   | Options     |
+| -------------- | ------ | ----------- |
+| nickname       | string | null: false |
+| email          | string | null: false |
+| password       | string | null: false |
+| name(japanese) | string | null: false |
+| name(katakane) | string | null: false |
+| birthday       | date   | null: false |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many :item
+- has_many :record
 
-* System dependencies
+## Items テーブル
 
-* Configuration
+| Column               | Type       | Options                       |
+| -------------------- | ---------- | ----------------------------- |
+| item_name            | string     | null: false                   |
+| description          | text       | null: false                   |
+| category             | string     | null: false                   |
+| status               | string     | null: false                   |
+| delivery_burden      | string     | null: false                   |
+| delivery_prefectures | string     | null: false                   |
+| delivery_days        | integer    | null: false                   |
+| price                | integer    | null: false                   |
+| user                 | references | null: false foreign_key: true |
 
-* Database creation
+### Association
 
-* Database initialization
+- belongs_to :user
+- has_one :order
+- has_one :record
 
-* How to run the test suite
+## Orders テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column       | Type    | Options     |
+| ------------ | ------- | ----------- |
+| postal_code  | integer | null: false |
+| prefectures  | string  | null: false |
+| city         | string  | null: false |
+| address      | string  | null: false |
+| building     | string  |
+| phone_number | integer | null: false |
 
-* Deployment instructions
+### Association
 
-* ...
+- belongs_to :item
+
+## Records テーブル
+
+| Column | Type       | Options                       |
+| ------ | ---------- | ----------------------------- |
+| user   | references | null: false foreign_key: true |
+| item   | references | null: false foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to ;item
