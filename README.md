@@ -37,14 +37,15 @@
 
 ## Orders テーブル
 
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| postal_code     | string  | null: false |
-| prefectures_id  | integer | null: false |
-| city            | string  | null: false |
-| address         | string  | null: false |
-| building        | string  |
-| phone_number    | string  | null: false |
+| Column          | Type       | Options                       |
+| --------------- | ---------- | ----------------------------- |
+| postal_code     | string     | null: false                   |
+| prefectures_id  | integer    | null: false                   |
+| city            | string     | null: false                   |
+| address         | string     | null: false                   |
+| building        | string     |
+| phone_number    | string     | null: false                   |
+| record          | references | null: false foreign_key: true |
 
 ### Association
 
@@ -56,7 +57,6 @@
 | ------ | ---------- | ----------------------------- |
 | user   | references | null: false foreign_key: true |
 | item   | references | null: false foreign_key: true |
-| order  | references | null: false foreign_key: true |
 
 ### Association
 
