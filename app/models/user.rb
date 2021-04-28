@@ -5,17 +5,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   with_options presence: true do
     validates :nickname
-    validates :last_name_japanese, format: { with: LAST_NAME_JAPANESE_REGEX = /\A(?=.*?[ぁ-んァ-ヶ一-龥々])[ぁ-んァ-ヶ一-龥々]+\z/i.freeze, message: 'Full-width characters' } do
-    end 
-    validates :first_name_japanese, format: { with: FIRST_NAME_JAPANESE_REGEX = /\A(?=.*?[ぁ-んァ-ヶ一-龥々])[ぁ-んァ-ヶ一-龥々]+\z/i.freeze, message: 'Full-width characters' } do
-    end
-    validates :last_name_katakana, format: { with: LAST_NAME_KATAKANA_REGEX = /\A(?=.*?[ァ-ヴ])[ァ-ヴ]+\z/i.freeze, message: 'Full-width katakana characters'  } do
-    end
-    validates :first_name_katakana, format: { with: FIRST_NAME_KATAKANA_REGEX = /\A(?=.*?[ァ-ヴ])[ァ-ヴ]+\z/i.freeze, message: 'Full-width katakana characters'  } do
-    end
     validates :birthday
   end
-
+  with_options presence: true, format: { with: /\A(?=.*?[ぁ-んァ-ヶ一-龥々])[ぁ-んァ-ヶ一-龥々]+\z/i, message: 'Full-width characters' } do
+    validates :last_name_japanese
+    validates :first_name_japanese
+  end
+  with_options presence: true, format: { with: /\A(?=.*?[ァ-ヴ])[ァ-ヴ]+\z/i, message: 'Full-width katakana characters'  } do
+    validates :last_name_katakana
+    validates :first_name_katakana 
+  end
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください' 
 
