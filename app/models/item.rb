@@ -10,16 +10,10 @@ class Item < ApplicationRecord
   belongs_to :delivery_prefectures
   belongs_to :delivery_days
 
-  #validates :category_id, numericality: { other_than: 1 } 
-  #validates :status_id, numericality: { other_than: 1 } 
-  #validates :delivery_burden_id, numericality: { other_than: 1 } 
-  #validates :delivery_prefectures_id, numericality: { other_than: 1 } 
-  #validates :delivery_days_id, numericality: { other_than: 1 } 
-
   with_options presence: true do
     validates :item_name
     validates :description
-    validates :price
+    validates :image
   end
 
   with_options presence: true, numericality: { other_than: 1 } do
@@ -29,5 +23,7 @@ class Item < ApplicationRecord
     validates :delivery_prefectures_id
     validates :delivery_days_id
   end
+
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
 end
