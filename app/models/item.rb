@@ -14,16 +14,15 @@ class Item < ApplicationRecord
     validates :item_name
     validates :description
     validates :image
-  end
 
-  with_options presence: true, numericality: { other_than: 1 } do
-    validates :category_id
-    validates :status_id
-    validates :delivery_burden_id
-    validates :delivery_prefectures_id
-    validates :delivery_days_id
-  end
+    with_options numericality: { other_than: 1 } do
+      validates :category_id
+      validates :status_id
+      validates :delivery_burden_id
+      validates :delivery_prefectures_id
+      validates :delivery_days_id
+    end
 
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+    end
 end

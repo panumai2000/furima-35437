@@ -68,14 +68,39 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'priceは、300以上でなければ出品できないこと' do
-        @item.price = '200'
+        @item.price = 200
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceは、9,999,999以下でなければ出品できないこと' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+      end
+      it 'category_idのidの1を選択すると出品できない' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+      it 'status_idのidの1を選択すると出品できない' do
+        @item.status_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status must be other than 1")
+      end
+      it 'delivery_burden_idのidの1を選択すると出品できない' do
+        @item.delivery_burden_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery burden must be other than 1")
+      end
+      it 'delivery_prefectures_idのidの1を選択すると出品できない' do
+        @item.delivery_prefectures_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery prefectures must be other than 1")
+      end
+      it 'delivery_days_idのidの1を選択すると出品できない' do
+        @item.delivery_days_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery days must be other than 1")
       end
     end
   end
