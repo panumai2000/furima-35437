@@ -53,7 +53,7 @@ class ItemsController < ApplicationController
   end
 
   def set_set_item
-    unless @item.user_id == current_user.id =! @item.record.present?
+    unless @item.user_id == current_user.id && @item.record.blank?
       redirect_to root_path
     end
   end
