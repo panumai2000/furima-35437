@@ -44,7 +44,12 @@ RSpec.describe RecordOrder, type: :model do
         @record_order.valid?
         expect(@record_order.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが11桁以内でないと購入できない' do
+      it 'phone_numberが9桁以下では購入できない' do
+        @record_order.phone_number = '090111111'
+        @record_order.valid?
+        expect(@record_order.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberが12桁以上では購入できない' do
         @record_order.phone_number = '090111111111'
         @record_order.valid?
         expect(@record_order.errors.full_messages).to include("Phone number is invalid")
