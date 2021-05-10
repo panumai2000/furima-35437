@@ -18,15 +18,7 @@ class RecordsController < ApplicationController
     end
   end
 
-  def set_record
-    @item = Item.find(params[:item_id]) 
-  end
 
-  def set_set_record
-    if @item.user_id == current_user.id || @item.record.present?
-      redirect_to root_path
-    end
-  end
 
   private
 
@@ -41,6 +33,16 @@ class RecordsController < ApplicationController
       card: record_order_params[:token],    
       currency: 'jpy'
     )
+  end
+
+  def set_record
+    @item = Item.find(params[:item_id]) 
+  end
+
+  def set_set_record
+    if @item.user_id == current_user.id || @item.record.present?
+      redirect_to root_path
+    end
   end
 
 end

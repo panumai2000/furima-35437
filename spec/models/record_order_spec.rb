@@ -12,8 +12,6 @@ RSpec.describe RecordOrder, type: :model do
     context '商品購入できるとき' do
       it 'postal_code,delivery_prefectures_id,ctiy,address,phone_number,tokenが存在すれば登録できる' do
         expect(@record_order).to be_valid
-        #expect(@user).to be_valid
-        #expect(@item).to be_valid
       end
       it 'buildingは空でも購入できる' do
         @record_order.building = ''
@@ -71,7 +69,7 @@ RSpec.describe RecordOrder, type: :model do
         @record_order.valid?
         expect(@record_order.errors.full_messages).to include("Token can't be blank")
       end
-      it 'category_idのidの1を選択すると出品できない' do
+      it 'delivery_prefectures_idのidの1を選択すると出品できない' do
         @record_order.delivery_prefectures_id = '1'
         @record_order.valid?
         expect(@record_order.errors.full_messages).to include("Delivery prefectures must be other than 1")
