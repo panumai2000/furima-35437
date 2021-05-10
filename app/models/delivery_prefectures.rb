@@ -20,6 +20,6 @@ class DeliveryPrefectures < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :items
-  has_many :record_order
+  has_many :record_orders
   
   end

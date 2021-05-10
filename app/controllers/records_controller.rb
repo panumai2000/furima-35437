@@ -1,12 +1,10 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index,:create]
   before_action :set_record, only: [:index,:create]
+  before_action :set_set_record, only: [:index,:create]
 
   def index
     @record_order = RecordOrder.new
-    if @item.user_id == current_user.id || @item.record.present?
-      redirect_to root_path
-    end
   end
 
   def create
@@ -22,6 +20,12 @@ class RecordsController < ApplicationController
 
   def set_record
     @item = Item.find(params[:item_id]) 
+  end
+
+  def set_set_record
+    if @item.user_id == current_user.id || @item.record.present?
+      redirect_to root_path
+    end
   end
 
   private
