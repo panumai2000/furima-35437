@@ -70,7 +70,7 @@ RSpec.describe RecordOrder, type: :model do
         expect(@record_order.errors.full_messages).to include("Token can't be blank")
       end
       it 'delivery_prefectures_idのidの1を選択すると出品できない' do
-        @record_order.delivery_prefectures_id = '1'
+        @record_order.delivery_prefectures_id = 1
         @record_order.valid?
         expect(@record_order.errors.full_messages).to include("Delivery prefectures must be other than 1")
       end

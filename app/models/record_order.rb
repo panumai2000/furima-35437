@@ -15,7 +15,7 @@ class RecordOrder
   end
   def save
     record = Record.create(user_id: user_id, item_id:item_id)
-    Order.create(postal_code: postal_code, delivery_prefectures_id: delivery_prefectures_id, city: city, address: address, building: building, phone_number: phone_number,record_id: record)
+    Order.create(postal_code: postal_code, delivery_prefectures_id: delivery_prefectures_id, city: city, address: address, building: building, phone_number: phone_number,record_id: record.id)
   end
 
 end
